@@ -35,7 +35,7 @@ def process_images_and_coordinates(data_directory):
     print(f"Coordinates saved to {output_path}")
 
 
-def draw_bounding_box(image_path, bounding_box, output_path, use_normalized=False):
+def draw_bounding_box(image_path, bounding_box, output_path, use_normalized=True):
     """
     Draws a bounding box on an image.
 
@@ -66,16 +66,16 @@ def draw_bounding_box(image_path, bounding_box, output_path, use_normalized=Fals
     print(f"Image saved with bounding box at {output_path}")
 
 
-IMAGE = 'img1008869.jpg'
+IMAGE = 'img1005656.jpg'
 
-image_path = f"/Users/geronimobasso/Desktop/extra/drones/database/new-drone-images 2/clear-background/{IMAGE}"
+image_path = f"images/{IMAGE}"
 
-bounding_box_normalized = [0.58, 0.18, 0.64, 0.22]
+bounding_box_normalized = [0.82, 0.24, 0.93, 0.32]
 bounding_box_pixels = [109, 187, 163, 251]
 
 OUTPUT_IMAGE = "bb_" + IMAGE
-OUTPUT_PATH = f"/Users/geronimobasso/Desktop/extra/ai4hydrop/vlm-drones/output/{OUTPUT_IMAGE}"
+OUTPUT_PATH = f"output/{OUTPUT_IMAGE}"
 
-draw_bounding_box(image_path, bounding_box_pixels, OUTPUT_PATH, use_normalized=False)
+draw_bounding_box(image_path, bounding_box_normalized, OUTPUT_PATH, use_normalized=True)
 
-process_images_and_coordinates('images/')
+#process_images_and_coordinates('images/')

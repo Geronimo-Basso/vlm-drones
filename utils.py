@@ -60,17 +60,17 @@ def draw_bounding_box(image_path, bounding_box, output_path, use_normalized=True
         x_min, y_min, x_max, y_max = bounding_box
 
     draw = ImageDraw.Draw(image)
-    draw.rectangle([x_min, y_min, x_max, y_max], outline="red", width=3)
+    draw.rectangle([x_min, y_min, x_max, y_max], outline="red", width=10)
 
     image.save(output_path)
     print(f"Image saved with bounding box at {output_path}")
 
 
-IMAGE = 'img1005656.jpg'
+IMAGE = 'img1004588.jpg'
 
-image_path = f"images/{IMAGE}"
+image_path = (f"/Users/geronimobasso/Desktop/extra/drones/database/Originales/{IMAGE}")
 
-bounding_box_normalized = [0.82, 0.24, 0.93, 0.32]
+bounding_box_normalized = [0.35390625, 0.24861111111111112, 0.025, 0.05277777777777778]
 bounding_box_pixels = [109, 187, 163, 251]
 
 OUTPUT_IMAGE = "bb_" + IMAGE

@@ -43,7 +43,7 @@ def draw_bounding_box(image_path, bounding_box, output_path, use_normalized=True
     - image_path: str, path to the image.
     - bounding_box: list, bounding box coordinates. If use_normalized=True, the format is [x_min, y_min, x_max, y_max]
                     with normalized values between 0 and 1. If use_normalized=False, it should be pixel coordinates.
-    - output_path: str, path to save the output image with the bounding box.
+    - output_path: str, path to save the inference_results image with the bounding box.
     - use_normalized: bool, if True, the bounding box is in normalized units; if False, it is in pixel values.
     """
     # Load the image
@@ -74,7 +74,7 @@ bounding_box_normalized = [0.35390625, 0.24861111111111112, 0.025, 0.05277777777
 bounding_box_pixels = [109, 187, 163, 251]
 
 OUTPUT_IMAGE = "bb_" + IMAGE
-OUTPUT_PATH = f"output/{OUTPUT_IMAGE}"
+OUTPUT_PATH = f"inference_results/{OUTPUT_IMAGE}"
 
 draw_bounding_box(image_path, bounding_box_normalized, OUTPUT_PATH, use_normalized=True)
 

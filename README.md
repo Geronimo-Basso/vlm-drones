@@ -1,49 +1,46 @@
 # Evaluating Drone Detection Performance in Vision-Language Models
 
-With the recent surge in Large Language Models (LLMs) over the past few years, it has become increasingly important to evaluate and understand what these models excel at and where they fall short. Their capabilities have expanded beyond traditional language tasks, extending into vision models, larger language models, and large multimodal models that combine both vision and language understanding.
+With the recent surge in Large Language Models (LLMs) over the past few years, it has become increasingly important to evaluate and understand what these models excel at and where they fall short. Their capabilities have expanded beyond traditional language tasks, extending into vision models and large multimodal models that combine both vision and language understanding.
 
 There is still much room to explore the boundaries of where these models perform best, especially in more specific and complex tasks like drone detection. Likewise, it's crucial to identify the areas where they struggle, as understanding these limitations will be key to improving their performance and designing better models in the future.
 
-In this project, we will use open source VLMs to evaluate the performance of vision-language models in drone detection tasks. Using mainly Qwen-VL which is a chinese model developed by Alibaba Cloud. We will also explore other open source VLM like PHI-3 from microsoft. 
+In this project, we will use open-source Vision-Language Models (VLMs) to evaluate their performance in drone detection tasks, primarily using Qwen-VL, a Chinese model developed by Alibaba Cloud.
 
-Also, we will consider the use of more commercially models like Gemini and GPT.
+## Qwen-VL Models
 
-Getting more into detail about Qwen2-VL, it offers three main models:
-- Qwen-VL-2B (OS)
-- Qwen-VL-7B (OS)
-- Qwen-VL-72B (CS)
+Qwen-VL offers three main models:
+- **Qwen-VL-2B (OS)**
+- **Qwen-VL-7B (OS)**
+- **Qwen-VL-72B (CS)**
 
 ## The Importance of Evaluating Multimodal Models in Drone Detection
 
-Vision-language models represent a new frontier for applications requiring both image processing and language understanding. In the context of drone detection, these models could prove useful in scenarios where it is necessary to not only detect and classify drones from visual input but also generate meaningful language-based descriptions or reports based on the detected objects.
+Vision-Language Models represent a new frontier for applications requiring both image processing and language understanding. In the context of drone detection, these models could prove useful in scenarios where it is necessary not only to detect and classify drones from visual input but also to generate meaningful language-based descriptions or reports based on the detected objects.
 
-Evaluating how well these models can handle drone detection tasks is crucial for several reasons:
-- **Security and Surveillance:** Drones are increasingly being used for both legal and illegal activities. Detection of drones in restricted airspaces or high-security zones could help in preventing unauthorized surveillance or malicious activity.
-- **Disaster Management:** Drones play a significant role in disaster relief and environmental monitoring. Detecting them accurately helps improve the efficiency of managing drone fleets and analyzing the data they collect.
-- **Civilian Applications:** Drones are widely used in commercial sectors such as agriculture, film production, and package delivery. Accurate detection can optimize their safe use in civilian airspace.
-
-## Metrics for Evaluating Performance
-
-To effectively assess how vision-language models perform in drone detection tasks, several key metrics need to be considered:
-
-1. **Accuracy:** The model's ability to correctly detect and classify drones in various environments, including challenging conditions like low light, complex backgrounds, or occlusions.
-2. **Precision and Recall:** These metrics are vital for understanding the trade-off between detecting drones (recall) and minimizing false positives (precision), especially in sensitive environments like airports.
-3. **F1 Score:** This metric balances precision and recall, providing a single measure to evaluate the model's detection capabilities.
+Evaluating how well these models handle drone detection tasks is crucial for several reasons:
+- **Security and Surveillance:** Drones are increasingly used for both legal and illegal activities. Detection of drones in restricted airspaces or high-security zones could help in preventing unauthorized surveillance or malicious activity.
+- **Disaster Management:** Drones play a significant role in disaster relief and environmental monitoring. Accurate detection helps improve the efficiency of managing drone fleets and analyzing the data they collect.
+- **Civilian Applications:** Drones are widely used in commercial sectors such as agriculture, film production, and package delivery. Accurate detection optimizes their safe use in civilian airspace.
 
 ## Challenges in Evaluating Drone Detection
 
-Vision-language models, while powerful, face several challenges in the context of drone detection:
-
+Vision-Language Models, while powerful, face several challenges in the context of drone detection:
 - **Small Object Detection:** Drones are typically small and can appear as tiny objects in wide-angle images or videos. Many vision models struggle with small object detection, which may impact their performance in drone surveillance tasks.
-- **Environmental Factors:** The performance of these models may degrade in harsh weather conditions, such as rain, fog, or strong sunlight, where visibility is reduced.
-- **Multimodal Complexity:** Combining vision and language understanding in real-time can increase the computational complexity. For drone detection tasks requiring instant responses, models need to be highly optimized for both speed and accuracy.
 
-## Set the environment
+## Conclusion
 
-pip install git+https://github.com/huggingface/transformers
+After evaluating the performance of these models on a 400-image dataset, we can conclude the following:
 
-pip install qwen-vl-utils
+Qwen-VL-7B results are impressive in classification tasks, achieving an accuracy of 81.5%, detecting 326 drones in 400 images. For detection tasks, the results vary depending on the IoU (Intersection over Union) threshold used. At the normal threshold of 0.5, the precision is low, at 0.23. However, using a 0.4 or 0.3 threshold shows some interesting results. Here are the full results:
 
-pip install torchvision
-
-pip install accelerate# vlm-drones
+| Threshold | TP  | FN  | LE  | Avg IoU | Precision | Recall  |
+|-----------|-----|-----|-----|---------|-----------|---------|
+| 0.1       | 261 | 74  | 65  | 0.3246  | 0.8006    | 0.7791  |
+| 0.2       | 218 | 74  | 108 | 0.3246  | 0.6687    | 0.7466  |
+| 0.3       | 167 | 74  | 159 | 0.3246  | 0.5123    | 0.6929  |
+| 0.4       | 127 | 74  | 199 | 0.3246  | 0.3896    | 0.6318  |
+| 0.5       | 77  | 74  | 249 | 0.3246  | 0.2362    | 0.5099  |
+| 0.6       | 46  | 74  | 280 | 0.3246  | 0.1411    | 0.3833  |
+| 0.7       | 19  | 74  | 307 | 0.3246  | 0.0583    | 0.2043  |
+| 0.8       | 3   | 74  | 323 | 0.3246  | 0.0092    | 0.0390  |
+| 0.9       | 0   | 74  | 326 | 0.3246  | 0.0000    | 0.0000  |
